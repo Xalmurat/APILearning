@@ -29,4 +29,20 @@ public class getPeople {
 
     }
 
+    @Test
+    public void test02_validate_average_height_for_people() {
+
+        Response response = RestAssured.get("/people");
+        JsonPath js = response.jsonPath();
+
+        int sum = 0;
+        for (int i = 0; i < 10 ; i++) {
+            System.out.println((i+1)+" person height : " + js.getString("results["+i+"].height"));
+            sum += Integer.parseInt(js.getString("results["+i+"].height"));
+        }
+        System.out.println("The average height will be "+sum/10);
+
+    }
+
+
 }
